@@ -104,8 +104,9 @@ db.prepare(`
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre TEXT NOT NULL,
         correo TEXT NOT NULL,
-        contrasenia TEXT NOT NULL,
-        numeroTelefono INT NOT NULL
+        contrasenia TEXT,
+        numeroTelefono INT NOT NULL,
+        invitado INT NOT NULL
     )
 `).run();
 
