@@ -20,25 +20,8 @@ export default function CartPreview({ isOpen, onClose }) {
   const router = useRouter();
   const subtotal = cart.reduce((acc, item) => acc + item.subtotal, 0);
 
-  async function handleCheckout() {
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cart }),
-      });
-
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        console.error("No se pudo redirigir a Stripe");
-      }
-    } catch (err) {
-      console.error("Error en checkout:", err);
-    }
+  function handleCheckout() {
+    router.push("/checkout");
   }
 
   return (
@@ -83,7 +66,7 @@ export default function CartPreview({ isOpen, onClose }) {
 
         <div className={styles.cartFooter}>
           <div className={styles.subtotal}>Subtotal: ${subtotal.toFixed(2)}</div>
-          <button onClick={handleCheckout} className={styles.checkout}>Secure Checkout</button>
+          <button onClick={handleCheckout} className={styles.checkout}>Compra segura</button>
         </div>
       </div>
     </div>

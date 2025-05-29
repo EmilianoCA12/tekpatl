@@ -109,9 +109,10 @@
 }
 
 .checkout {
-  background: black;
+  background: #333;
   color: white;
   padding: 0.9rem;
+  margin-top: 1rem;
   width: 100%;
   border: none;
   cursor: pointer;
