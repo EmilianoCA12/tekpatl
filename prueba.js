@@ -35,3 +35,31 @@ console.log("\nDetalles de pedidos registrados:");
 filas.forEach((detalle) => {
     console.log(`ID: ${detalle.id}, PedidoID: ${detalle.idPedido}, Talla: ${detalle.talla}, Color: ${detalle.color}, Cantidad: ${detalle.cantidad}, Subtotal: $${detalle.subTotal}`);
 });
+
+// Función para mostrar estructura de una tabla
+function mostrarEstructura(tabla) {
+    console.log(`\n📦 Estructura de la tabla '${tabla}':`);
+    const columnas = db.prepare(`PRAGMA table_info(${tabla})`).all();
+    columnas.forEach(col => {
+        console.log(`- ${col.name} (${col.type})${col.pk ? " [PK]" : ""}${col.notnull ? " [NOT NULL]" : ""}`);
+    });
+}
+
+// Función para mostrar filas de una tabla
+function mostrarFilas(tabla) {
+    const filas = db.prepare(`SELECT * FROM ${tabla}`).all();
+    console.log(`\n📋 Registros en '${tabla}':`);
+    if (filas.length === 0) {
+        console.log("   (sin registros)");
+    } else {
+        filas.forEach(fila => console.log(fila));
+    }
+}
+
+// Tablas a revisar
+const tablas = ['Joyas', 'DImagenes', 'Cliente', 'Pedido', 'DetallePedido'];
+
+for (const tabla of tablas) {
+    mostrarEstructura(tabla);
+    mostrarFilas(tabla);
+}
