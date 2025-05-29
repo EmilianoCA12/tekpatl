@@ -1,0 +1,41 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; /* Centra contenido horizontal */
+    text-align: center; /* Centra el texto dentro de los hijos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    min-width: 350px;
+    padding-top: 2.5rem;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+}
+
+.imagen {
+    position: relative;
+    height: 350px;
+    width: 250px;
+
+    display: flex; /* Para centrar la imagen dentro */
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .imagen {
+        height: 350px;
+        width: 250px;
+    }
+}
+
+.titulo {
+    font-family: 'ClassicalRomance', sans-serif;
+    font-size: x-large;
+    margin-top: 2rem;
+}

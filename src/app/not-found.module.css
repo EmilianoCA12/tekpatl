@@ -1,0 +1,11 @@
+.principal {
+    height: 51vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    font-family: 'ClassicalRomance', sans-serif;
+}

@@ -1,0 +1,131 @@
+.headerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.5rem 1rem 0rem;
+  position: fixed; /* Fijo en la pantalla */
+  top: 0;          /* En la parte superior */
+  left: 0;
+  right: 0;
+  z-index: 1100;   /* Sobre otros elementos */
+  background-color: white; /* Fondo para que no sea transparente */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Opcional: sombra para que destaque */
+}
+
+.links {
+  font-size: larger;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  color: #47453e;
+}
+
+.links::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.links:hover {
+  color: rgb(185, 174, 114);
+}
+
+.links:hover::after {
+  width: 100%;
+}
+
+.linkDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5rem;
+  width: 100%;
+}
+
+.upperNav {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 5px;
+}
+
+.logo {
+  justify-self: center;
+  margin-left: 12px;
+}
+
+.acciones {
+  justify-self: end;
+}
+
+.upperNavMini {
+  margin-left: 2rem;
+}
+
+.hov:hover {
+  color: rgb(185, 174, 114);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  padding: 2rem 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mobileMenu.open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobileMenu.closed {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: flex-start;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+.menuOverlay.closed {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.menuOverlay.open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.upperNavHam {
+    margin-right: 2rem;
+}

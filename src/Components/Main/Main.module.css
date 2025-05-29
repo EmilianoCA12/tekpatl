@@ -1,0 +1,108 @@
+.titulo {
+    font-family: 'ClassicalRomance', sans-serif;
+    font-size: xx-large;
+    margin: 1.5rem;
+    text-align: center;
+}
+
+.cards {
+    margin: 0 1.5rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.cardAnillo {
+    background-image: url('/images/anillos.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 40vw;
+    transition: transform 0.3s ease, background-image 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.cardAnillo:hover {
+    background-image: url('/images/anillos2.jpeg'); /* Cambia aquí por la imagen que quieres al hacer hover */
+    transform: scale(1.05); /* Crece un 5% */
+    cursor: pointer;
+}
+
+.cardCollares {
+    background-image: url('/images/collares.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 40vw;
+    transition: transform 0.3s ease, background-image 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.cardCollares:hover {
+    background-image: url('/images/collares.jpg'); /* Cambia aquí por la imagen que quieres al hacer hover */
+    transform: scale(1.05); /* Crece un 5% */
+    cursor: pointer;
+}
+
+.cardAretes {
+    background-image: url('/images/aretes.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 40vw;
+    transition: transform 0.3s ease, background-image 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.cardAretes:hover {
+    background-image: url('/images/aretes.jpg'); /* Cambia aquí por la imagen que quieres al hacer hover */
+    transform: scale(1.05); /* Crece un 5% */
+    cursor: pointer;
+}
+
+.cardDijes {
+    background-image: url('/images/dijes.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 40vw;
+    transition: transform 0.3s ease, background-image 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+}
+
+.cardDijes:hover {
+    background-image: url('/images/dijes.jpg'); /* Cambia aquí por la imagen que quieres al hacer hover */
+    transform: scale(1.05); /* Crece un 5% */
+    cursor: pointer;
+}
+
+.cardTitle {
+    font-family: 'ClassicalRomance', sans-serif;
+    font-size: x-large;
+    color: white;
+    text-align: center;
+    height: 92%;
+    align-content: end;
+}
+
+@media (max-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .cardAnillo, .cardCollares, .cardAretes, .cardDijes {
+        height: 150vw;
+    }
+
+    .video {
+        margin-top: 9vw;
+    }
+}
