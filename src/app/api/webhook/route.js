@@ -41,6 +41,7 @@ export async function POST(req) {
     const metadata = session.metadata;
 
     try {
+      console.log("Metadata recibida: ", metadata)
       const stmtCliente = db.prepare(`
         INSERT INTO Cliente (nombre, correo, numeroTelefono, invitado)
         VALUES (?, ?, ?, 1)
