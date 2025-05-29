@@ -1,4 +1,4 @@
-// src/app/api/webhook/route.js
+// ✅ /src/app/api/webhook/route.js
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import sql from 'better-sqlite3';
@@ -13,7 +13,6 @@ export const config = {
   },
 };
 
-// Función para leer el cuerpo del request sin procesar (App Router usa streams)
 async function buffer(readable) {
   const chunks = [];
   for await (const chunk of readable) {
@@ -35,13 +34,12 @@ export async function POST(req) {
     return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
   }
 
-  // ✅ Manejo del evento
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     const metadata = session.metadata;
 
     try {
-      console.log("Metadata recibida: ", metadata)
+      const codigo = metadata.codigo;
       const stmtCliente = db.prepare(`
         INSERT INTO Cliente (nombre, correo, numeroTelefono, invitado)
         VALUES (?, ?, ?, 1)
@@ -54,10 +52,10 @@ export async function POST(req) {
       const idCliente = result.lastInsertRowid;
 
       const stmtPedido = db.prepare(`
-        INSERT INTO Pedido (idCliente, estatus, total)
-        VALUES (?, 0, ?)
+        INSERT INTO Pedido (idCliente, estatus, total, codigo)
+        VALUES (?, 0, ?, ?)
       `);
-      const resultPedido = stmtPedido.run(idCliente, metadata.total);
+      const resultPedido = stmtPedido.run(idCliente, metadata.total, codigo);
       const idPedido = resultPedido.lastInsertRowid;
 
       const cart = JSON.parse(metadata.cart);

@@ -117,6 +117,7 @@ db.prepare(`
         idCliente INTEGER,
         estatus INTEGER NOT NULL,
         total FLOAT NOT NULL,
+        codigo TEXT NOT NULL,
         FOREIGN KEY (idCliente) REFERENCES Cliente(id)
     )
 `).run();

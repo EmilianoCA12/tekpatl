@@ -12,6 +12,9 @@ export async function POST(req) {
     });
   }
 
+  // Generar código único para identificar el pedido
+  const codigo = `TEK-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+
   // Convertimos los datos seguros a texto
   const metadata = {
     nombre: nombre || '',
@@ -23,7 +26,8 @@ export async function POST(req) {
       color: item.color,
       cantidad: item.cantidad,
       subtotal: item.subtotal
-    }))) // evitamos incluir imágenes o strings grandes
+    }))),
+    codigo
   };
 
   try {
@@ -42,7 +46,7 @@ export async function POST(req) {
         },
         quantity: item.cantidad,
       })),
-      success_url: `${process.env.NEXT_PUBLIC_URL}/exito?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.NEXT_PUBLIC_URL}/exito?codigo=${codigo}`,
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/cancelado`,
       metadata
     });
