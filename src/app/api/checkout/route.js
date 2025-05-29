@@ -1,17 +1,30 @@
-// /src/app/api/checkout/route.js
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const body = await req.json();
-  const { cart } = body;
+  const { cart, nombre, correo, telefono } = body;
 
   if (!cart || !Array.isArray(cart) || cart.length === 0) {
     return new Response(JSON.stringify({ error: 'Cart is empty or invalid' }), {
       status: 400,
     });
   }
+
+  // Convertimos los datos seguros a texto
+  const metadata = {
+    nombre: nombre || '',
+    correo: correo || '',
+    telefono: telefono || '',
+    total: cart.reduce((acc, item) => acc + item.subtotal, 0).toFixed(2),
+    cart: JSON.stringify(cart.map(item => ({
+      talla: item.talla,
+      color: item.color,
+      cantidad: item.cantidad,
+      subtotal: item.subtotal
+    }))) // evitamos incluir imágenes o strings grandes
+  };
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -22,23 +35,22 @@ export async function POST(req) {
           currency: 'mxn',
           product_data: {
             name: item.nombre,
-            description: `Color: ${item.color ?? 'Unico'}, Talla: ${item.talla ?? 'Unica'}`,
-            images: [
-              `${process.env.NEXT_PUBLIC_URL}${item.direccion}`
-            ]
+            description: `Color: ${item.color ?? 'Único'}, Talla: ${item.talla ?? 'Única'}`,
+            images: [`${process.env.NEXT_PUBLIC_URL}${item.direccion}`],
           },
-          unit_amount: Math.round(item.costo * 100), // Stripe espera centavos
+          unit_amount: Math.round(item.costo * 100),
         },
         quantity: item.cantidad,
       })),
       success_url: `${process.env.NEXT_PUBLIC_URL}/exito`,
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/cancelado`,
+      metadata
     });
 
-    return new Response(JSON.stringify({ url: session.url }), {
-      status: 200,
-    });
+    return new Response(JSON.stringify({ url: session.url }), { status: 200 });
+
   } catch (err) {
+    console.error("❌ Error al crear sesión de Stripe:", err);
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
     });

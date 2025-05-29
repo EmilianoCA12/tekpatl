@@ -63,11 +63,9 @@ export default function CheckOutPage() {
         },
         body: JSON.stringify({
           cart,
-          cliente: {
-            nombre,
-            correo,
-            telefono
-          }
+          nombre,
+          correo,
+          telefono
         }),
       });
 
