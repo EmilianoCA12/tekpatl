@@ -42,7 +42,7 @@ export async function POST(req) {
         },
         quantity: item.cantidad,
       })),
-      success_url: `${process.env.NEXT_PUBLIC_URL}/exito`,
+      success_url: `${process.env.NEXT_PUBLIC_URL}/exito?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/cancelado`,
       metadata
     });

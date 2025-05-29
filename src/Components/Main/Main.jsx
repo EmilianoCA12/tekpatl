@@ -28,14 +28,14 @@ export default function Main() {
                 <Link href="/anillos" className={styles.cardAnillo}>
                     <p className={styles.cardTitle}>ANILLOS</p>
                 </Link>
-                <Link href="/anillos" className={styles.cardCollares}>
-                    <p className={styles.cardTitle}>COLLARES</p>
-                </Link>
                 <Link href="/anillos" className={styles.cardAretes}>
                     <p className={styles.cardTitle}>ARETES</p>
                 </Link>
                 <Link href="/anillos" className={styles.cardDijes}>
                     <p className={styles.cardTitle}>DIJES</p>
+                </Link>
+                <Link href="/anillos" className={styles.cardCollares}>
+                    <p className={styles.cardTitle}>MINERALES</p>
                 </Link>
             </div>
         </div>
