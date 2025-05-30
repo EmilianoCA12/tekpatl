@@ -83,7 +83,7 @@ export default function Header() {
           <p className={clsx(dmSans.className, styles.links)}><Link href="/collares">COLLARES</Link></p>
           <p className={clsx(dmSans.className, styles.links)}><Link href="/aretes">ARETES</Link></p>
           <p className={clsx(dmSans.className, styles.links)}><Link href="/diges">DIJES</Link></p>
-          <p className={clsx(dmSans.className, styles.links)}><Link href="/">SEGUIMIENTO DE PEDIDO</Link></p>
+          <p className={clsx(dmSans.className, styles.links)}><Link href="/seguimiento">SEGUIMIENTO DE PEDIDO</Link></p>
         </div>
       </div>
 

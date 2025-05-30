@@ -112,7 +112,7 @@ export default function DetalleItem({ nombre, costo, incremento, id, lank, image
                         <div className={styles.formulario}>
                             {brillante === 1 && (
                                 <div>
-                                    <p>Color: <span className={styles.text}>{colorSeleccionado ?? "Seleccionar"}</span></p>
+                                    <p>Zirconia: <span className={styles.text}>{colorSeleccionado ?? "Seleccionar"}</span></p>
                                     <div className={styles.colores}>
                                         {colores.map((color) => (
                                         <button
