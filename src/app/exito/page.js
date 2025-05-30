@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import useCartStore from "@/store/cartStore";
 import styles from "./Exito.module.css";
-import Link from "next/link";
 
 export default function ExitoPage() {
   const [verificado, setVerificado] = useState(false);
@@ -14,11 +13,9 @@ export default function ExitoPage() {
   const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const codigoParam = searchParams.get("codigo");
 
-    if (!codigoParam || window.sessionStorage.getItem("exitoVisto") === "1") {
+    if (!codigoParam) {
       router.replace("/");
       return;
     }
@@ -31,7 +28,6 @@ export default function ExitoPage() {
           setCodigo(codigoParam);
           clearCart();
           window.history.replaceState({}, document.title, "/exito");
-          window.sessionStorage.setItem("exitoVisto", "1");
         } else {
           router.replace("/");
         }
@@ -48,7 +44,7 @@ export default function ExitoPage() {
       <h1 className={styles.title}>🎉 ¡Gracias por tu compra!</h1>
       <p className={styles.text}>Recibirás un correo con la confirmación.</p>
       <p className={styles.text}>Tu código de pedido es: <strong>{codigo}</strong></p>
-      <Link href="/" className={styles.button}>Volver a la tienda</Link>
+      <a href="/" className={styles.button}>Volver a la tienda</a>
     </div>
   );
 }

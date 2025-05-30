@@ -5,8 +5,6 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const codigo = searchParams.get("codigo");
 
-  console.log(codigo);
-
   const pedido = db.prepare("SELECT * FROM Pedido WHERE codigo = ?").get(codigo);
 
   if (pedido) {
