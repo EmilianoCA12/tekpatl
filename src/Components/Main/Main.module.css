@@ -13,7 +13,7 @@
 }
 
 .cardAnillo {
-    background-image: url('/images/anillos.jpg');
+    background-image: url('/images/anillos.jpeg');
     background-size: cover;
     width: 100%;
     height: 40vw;
@@ -31,7 +31,7 @@
 }
 
 .cardCollares {
-    background-image: url('/images/collares.jpg');
+    background-image: url('/images/minerales.jpeg');
     background-size: cover;
     width: 100%;
     height: 40vw;
@@ -43,7 +43,7 @@
 }
 
 .cardCollares:hover {
-    background-image: url('/images/collares.jpg'); /* Cambia aquí por la imagen que quieres al hacer hover */
+    background-image: url('/images/minerales.jpeg'); /* Cambia aquí por la imagen que quieres al hacer hover */
     transform: scale(1.05); /* Crece un 5% */
     cursor: pointer;
 }
