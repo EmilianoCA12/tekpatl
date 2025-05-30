@@ -14,33 +14,31 @@ export default function ExitoPage() {
   const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
-    useEffect(() => {
-  if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return;
 
-  const codigoParam = searchParams.get("codigo");
+    const codigoParam = searchParams.get("codigo");
 
-  if (!codigoParam || window.sessionStorage.getItem("exitoVisto") === "1") {
-    router.replace("/");
-    return;
-  }
-
-  fetch(`/api/validar-codigo?codigo=${codigoParam}`)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.ok) {
-        setVerificado(true);
-        setCodigo(codigoParam);
-        clearCart();
-        window.history.replaceState({}, document.title, "/exito");
-        window.sessionStorage.setItem("exitoVisto", "1");
-      } else {
-        router.replace("/");
-      }
-    })
-    .catch(() => {
+    if (!codigoParam || window.sessionStorage.getItem("exitoVisto") === "1") {
       router.replace("/");
-    });
-}, []);
+      return;
+    }
+
+    fetch(`/api/validar-codigo?codigo=${codigoParam}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.ok) {
+          setVerificado(true);
+          setCodigo(codigoParam);
+          clearCart();
+          window.history.replaceState({}, document.title, "/exito");
+          window.sessionStorage.setItem("exitoVisto", "1");
+        } else {
+          router.replace("/");
+        }
+      })
+      .catch(() => {
+        router.replace("/");
+      });
   }, []);
 
   if (!verificado) return null;
