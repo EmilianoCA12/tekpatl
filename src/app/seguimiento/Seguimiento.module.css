@@ -2,6 +2,7 @@
   padding: 2rem;
   text-align: center;
   margin-top: 2rem;
+  min-height: 50vh;
 }
 
 .title {
