@@ -14,35 +14,33 @@ export default function ExitoPage() {
   const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
+    useEffect(() => {
+  if (typeof window === "undefined") return;
+
   const codigoParam = searchParams.get("codigo");
 
-  // Si no hay código o ya fue visto en esta sesión
-  if (!codigoParam || sessionStorage.getItem("exitoVisto") === "1") {
+  if (!codigoParam || window.sessionStorage.getItem("exitoVisto") === "1") {
     router.replace("/");
     return;
   }
 
   fetch(`/api/validar-codigo?codigo=${codigoParam}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.ok) {
-          console.log(data);
-          setVerificado(true);
-          setCodigo(codigoParam);
-          clearCart();
-
-          // Oculta el parámetro en la URL
-          window.history.replaceState({}, document.title, "/exito");
-
-          // Marca como visto para esta sesión
-          sessionStorage.setItem("exitoVisto", "1");
-        } else {
-          router.replace("/");
-        }
-      })
-      .catch(() => {
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.ok) {
+        setVerificado(true);
+        setCodigo(codigoParam);
+        clearCart();
+        window.history.replaceState({}, document.title, "/exito");
+        window.sessionStorage.setItem("exitoVisto", "1");
+      } else {
         router.replace("/");
-      });
+      }
+    })
+    .catch(() => {
+      router.replace("/");
+    });
+}, []);
   }, []);
 
   if (!verificado) return null;
