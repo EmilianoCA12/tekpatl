@@ -1,5 +1,5 @@
+// ✅ checkout/route.js
 import Stripe from 'stripe';
-
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
@@ -12,10 +12,8 @@ export async function POST(req) {
     });
   }
 
-  // Generar código único para identificar el pedido
   const codigo = `TEK-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
 
-  // Convertimos los datos seguros a texto
   const metadata = {
     nombre: nombre || '',
     correo: correo || '',
