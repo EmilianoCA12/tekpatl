@@ -1,65 +1,44 @@
 const sql = require('better-sqlite3');
 const db = sql('tekpatl.db');
 
-// JOYAS
+// Mostrar Joyas
 let filas = db.prepare('SELECT * FROM Joyas').all();
-console.log("Joyas registradas:");
+console.log("📿 Joyas registradas:");
 filas.forEach((joya) => {
-    console.log(`ID: ${joya.id}, Nombre: ${joya.nombre}, Costo: ${joya.costo}, Incremento: ${joya.incremento}, Categoria: ${joya.categoria}, Descripción: ${joya.descripcion}`);
+  console.log(`ID: ${joya.id}, Nombre: ${joya.nombre}, Costo: ${joya.costo}, Incremento: ${joya.incremento}, Categoria: ${joya.categoria}, Descripción: ${joya.descripcion}`);
 });
 
-// IMÁGENES
+// Mostrar Imágenes
 filas = db.prepare('SELECT * FROM DImagenes').all();
-console.log("\nImágenes registradas:");
+console.log("\n🖼️ Imágenes registradas:");
 filas.forEach((imagen) => {
-    console.log(`ID: ${imagen.id}, idJoya: ${imagen.idJoya}, dirección: ${imagen.direccion}`);
+  console.log(`ID: ${imagen.id}, idJoya: ${imagen.idJoya}, Dirección: ${imagen.direccion}`);
 });
 
-// CLIENTES
+// Mostrar Administradores
+filas = db.prepare('SELECT * FROM Administrador').all();
+console.log("\n👨‍💼 Administradores registrados:");
+filas.forEach((admin) => {
+  console.log(`ID: ${admin.id}, Nombre: ${admin.nombre}, Correo: ${admin.correo}, Contraseña: ${admin.contrasenia}`);
+});
+
+// Mostrar Clientes
 filas = db.prepare('SELECT * FROM Cliente').all();
-console.log("\nClientes registrados:");
+console.log("\n🙋 Clientes registrados:");
 filas.forEach((cliente) => {
-    console.log(`ID: ${cliente.id}, Nombre: ${cliente.nombre}, Correo: ${cliente.correo}, Tel: ${cliente.numeroTelefono}, Invitado: ${cliente.invitado}`);
+  console.log(`ID: ${cliente.id}, Nombre: ${cliente.nombre}, Correo: ${cliente.correo}, Teléfono: ${cliente.numeroTelefono}, Invitado: ${cliente.invitado}`);
 });
 
-// PEDIDOS
+// Mostrar Pedidos
 filas = db.prepare('SELECT * FROM Pedido').all();
-console.log("\nPedidos registrados:");
+console.log("\n📦 Pedidos registrados:");
 filas.forEach((pedido) => {
-    console.log(`ID: ${pedido.id}, ClienteID: ${pedido.idCliente}, Estatus: ${pedido.estatus}, Total: $${pedido.total}`);
+  console.log(`ID: ${pedido.id}, ID Cliente: ${pedido.idCliente}, Total: ${pedido.total}, Estatus: ${pedido.estatus}, Código: ${pedido.codigo}`);
 });
 
-// DETALLE PEDIDO
+// Mostrar DetallePedido
 filas = db.prepare('SELECT * FROM DetallePedido').all();
-console.log("\nDetalles de pedidos registrados:");
+console.log("\n🧾 Detalles de pedidos:");
 filas.forEach((detalle) => {
-    console.log(`ID: ${detalle.id}, PedidoID: ${detalle.idPedido}, Talla: ${detalle.talla}, Color: ${detalle.color}, Cantidad: ${detalle.cantidad}, Subtotal: $${detalle.subTotal}`);
+  console.log(`ID: ${detalle.id}, ID Joya: ${detalle.idJoya}, ID Pedido: ${detalle.idPedido}, Talla: ${detalle.talla}, Color: ${detalle.color}, Cantidad: ${detalle.cantidad}, Subtotal: ${detalle.subTotal}`);
 });
-
-// Función para mostrar estructura de una tabla
-function mostrarEstructura(tabla) {
-    console.log(`\n📦 Estructura de la tabla '${tabla}':`);
-    const columnas = db.prepare(`PRAGMA table_info(${tabla})`).all();
-    columnas.forEach(col => {
-        console.log(`- ${col.name} (${col.type})${col.pk ? " [PK]" : ""}${col.notnull ? " [NOT NULL]" : ""}`);
-    });
-}
-
-// Función para mostrar filas de una tabla
-function mostrarFilas(tabla) {
-    const filas = db.prepare(`SELECT * FROM ${tabla}`).all();
-    console.log(`\n📋 Registros en '${tabla}':`);
-    if (filas.length === 0) {
-        console.log("   (sin registros)");
-    } else {
-        filas.forEach(fila => console.log(fila));
-    }
-}
-
-// Tablas a revisar
-const tablas = ['Joyas', 'DImagenes', 'Cliente', 'Pedido', 'DetallePedido'];
-
-for (const tabla of tablas) {
-    mostrarEstructura(tabla);
-    mostrarFilas(tabla);
-}
