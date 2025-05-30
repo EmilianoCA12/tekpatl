@@ -11,6 +11,7 @@ export async function GET(req) {
     return NextResponse.json({ ok: false, error: "Código no proporcionado" }, { status: 400 });
   }
 
+  // Buscar pedido
   const pedido = db.prepare(`
     SELECT id, total, estatus FROM Pedido WHERE codigo = ?
   `).get(codigo);
@@ -19,11 +20,19 @@ export async function GET(req) {
     return NextResponse.json({ ok: false, error: "Pedido no encontrado" }, { status: 404 });
   }
 
+  // Buscar detalles asociados al pedido con la joya correspondiente
   const detalles = db.prepare(`
-    SELECT d.talla, d.color, d.cantidad, d.subTotal, j.nombre, i.direccion
+    SELECT 
+      d.talla,
+      d.color,
+      d.cantidad,
+      d.subTotal,
+      j.nombre,
+      i.direccion
     FROM DetallePedido d
-    JOIN Joyas j ON d.idPedido = ?
-    JOIN DImagenes i ON j.id = i.idJoya
+    JOIN Joyas j ON d.idJoya = j.id
+    LEFT JOIN DImagenes i ON j.id = i.idJoya
+    WHERE d.idPedido = ?
     GROUP BY j.id
   `).all(pedido.id);
 

@@ -125,12 +125,14 @@ db.prepare(`
 db.prepare(`
     CREATE TABLE IF NOT EXISTS DetallePedido(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        idJoya INTEGER NOT NULL,
         idPedido INTEGER NOT NULL,
         talla INTEGER NOT NULL,
         color INTEGER NOT NULL,
         cantidad INTEGER NOT NULL,
         subTotal FLOAT NOT NULL,
-        FOREIGN KEY (idPedido) REFERENCES Pedido(id)
+        FOREIGN KEY (idPedido) REFERENCES Pedido(id),
+        FOREIGN KEY (idJoya) REFERENCES Joyas(id)
     )
 `).run();
 

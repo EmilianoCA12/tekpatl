@@ -22,6 +22,7 @@ export async function POST(req) {
     telefono: telefono || '',
     total: cart.reduce((acc, item) => acc + item.subtotal, 0).toFixed(2),
     cart: JSON.stringify(cart.map(item => ({
+      id: item.id,
       talla: item.talla,
       color: item.color,
       cantidad: item.cantidad,

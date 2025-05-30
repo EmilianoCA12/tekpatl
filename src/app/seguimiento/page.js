@@ -1,4 +1,3 @@
-// 1. src/app/seguimiento/page.jsx
 "use client";
 
 import { useState } from "react";
@@ -55,16 +54,21 @@ export default function SeguimientoPage() {
         <div className={styles.resumenBox}>
           <h2 className={styles.subTitle}>Resumen del pedido</h2>
           {pedido.detalles.map((item, index) => (
-            <div key={index} className={styles.itemSummary}>
+            <div
+              key={`${item.nombre}-${item.talla}-${item.color}-${index}`}
+              className={styles.itemSummary}
+            >
               <div className={styles.imageAndText}>
-                <div className={styles.imageBox}>
-                  <img
-                    src={item.direccion}
-                    alt={item.nombre}
-                    width={100}
-                    height={100}
-                  />
-                </div>
+                {item.direccion && (
+                  <div className={styles.imageBox}>
+                    <img
+                      src={item.direccion}
+                      alt={item.nombre}
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                )}
                 <div>
                   <p><strong>{item.nombre}</strong></p>
                   <p className={styles.subDetail}>Color: {item.color}</p>

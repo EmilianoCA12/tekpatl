@@ -60,12 +60,12 @@ export async function POST(req) {
 
       const cart = JSON.parse(metadata.cart);
       const stmtDetalle = db.prepare(`
-        INSERT INTO DetallePedido (idPedido, talla, color, cantidad, subTotal)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO DetallePedido (idJoya, idPedido, talla, color, cantidad, subTotal)
+        VALUES (?, ?, ?, ?, ?, ?)
       `);
 
       for (const item of cart) {
-        stmtDetalle.run(idPedido, item.talla, item.color, item.cantidad, item.subtotal);
+        stmtDetalle.run(item.id, idPedido, item.talla, item.color, item.cantidad, item.subtotal);
       }
 
       console.log("✅ Pedido registrado correctamente en la BD");
