@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import useCartStore from "@/store/cartStore";
 import styles from "./Exito.module.css";
+import Link from "next/link";
 
 export default function ExitoPage() {
   const [verificado, setVerificado] = useState(false);
@@ -44,7 +45,7 @@ export default function ExitoPage() {
       <h1 className={styles.title}>🎉 ¡Gracias por tu compra!</h1>
       <p className={styles.text}>Recibirás un correo con la confirmación.</p>
       <p className={styles.text}>Tu código de pedido es: <strong>{codigo}</strong></p>
-      <a href="/" className={styles.button}>Volver a la tienda</a>
+      <Link href="/" className={styles.button}>Volver a la tienda</Link>
     </div>
   );
 }
