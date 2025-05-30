@@ -14,21 +14,28 @@ export default function ExitoPage() {
   const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
-    const codigoParam = searchParams.get("codigo");
+  const codigoParam = searchParams.get("codigo");
 
-    if (!codigoParam) {
-      router.replace("/");
-      return;
-    }
+  // Si no hay código o ya fue visto en esta sesión
+  if (!codigoParam || sessionStorage.getItem("exitoVisto") === "1") {
+    router.replace("/");
+    return;
+  }
 
-    fetch(`/api/validar-codigo?codigo=${codigoParam}`)
+  fetch(`/api/validar-codigo?codigo=${codigoParam}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.ok) {
+          console.log(data);
           setVerificado(true);
           setCodigo(codigoParam);
           clearCart();
+
+          // Oculta el parámetro en la URL
           window.history.replaceState({}, document.title, "/exito");
+
+          // Marca como visto para esta sesión
+          sessionStorage.setItem("exitoVisto", "1");
         } else {
           router.replace("/");
         }
